@@ -1,0 +1,22 @@
+{
+  "name": "report-processor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test-splitting.js",
+    "start": "node src/index.js",
+    "demo:components": "node examples/individual-components.js",
+    "demo:individual": "node examples/individual-components.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.855.0",
+    "@aws-sdk/client-textract": "^3.855.0",
+    "dotenv": "^16.4.5",
+    "pdf-lib": "^1.17.1"
+  }
+}
