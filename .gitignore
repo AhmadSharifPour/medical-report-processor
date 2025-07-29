@@ -115,7 +115,6 @@ test-output/
 processed-reports/
 
 # Sample files (keep template but not actual medical data)
-sample-*.pdf
 test-documents/
 temp-files/
 

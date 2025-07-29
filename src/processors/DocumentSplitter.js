@@ -24,7 +24,7 @@ export class DocumentSplitter {
 
       // Start new report if we find a different patient and current report has pages
       if (isDifferentPatient && current.length > 0) {
-        console.log(`📄 New patient detected at page ${index + 1}, splitting report`);
+        console.log(`New patient detected at page ${index + 1}, splitting report`);
         reports.push(this._finalizeReport(current, reports.length));
         current = [];
         currentPatientInfo = pagePatientInfo;

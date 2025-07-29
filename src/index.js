@@ -66,7 +66,7 @@ export default createReportProcessor;
  * Show command line help
  */
 function showHelp() {
-  console.log("🏥 Medical Report Processor - Modular Architecture");
+  console.log("Medical Report Processor");
   console.log("=" .repeat(55));
   console.log("");
   console.log("USAGE:");
@@ -76,7 +76,7 @@ function showHelp() {
   console.log("EXAMPLES:");
   console.log("  node src/index.js                                    # Process default sample file");
   console.log("  node src/index.js lab-reports.pdf                   # Process specific file");
-  console.log("  npm start my-faxed-reports.pdf                      # Using npm script");
+  console.log("  npm start my-reports.pdf                      # Using npm script");
   console.log("");
   console.log("ENVIRONMENT VARIABLES:");
   console.log("  AWS_REGION                    AWS region (default: us-east-1)");
@@ -85,9 +85,6 @@ function showHelp() {
   console.log("  MAX_PAGES_PER_PATIENT        Max pages per patient (default: 10)");
   console.log("");
   console.log("OTHER COMMANDS:");
-  console.log("  npm test                                             # Test document splitting logic");
-  console.log("  npm run demo:components                              # Demo individual components");
-  console.log("  npm run demo:individual                              # Same as demo:components");
   console.log("");
   console.log("REQUIRED:");
   console.log("  - AWS credentials configured (AWS CLI, env vars, or IAM role)");
@@ -108,7 +105,7 @@ async function main() {
     return;
   }
 
-  console.log("🏥 Medical Report Processor - Modular Architecture");
+  console.log("Medical Report Processor");
   console.log("=" .repeat(55));
 
   try {
@@ -118,8 +115,8 @@ async function main() {
     // Get file path from arguments
     const filePath = args[0] || "sample-multi-patient-lab-report.pdf";
 
-    console.log(`📄 Processing file: ${filePath}`);
-    console.log(`🔧 Configuration: ${processor.config.aws.region} region, ${processor.config.aws.s3BucketName} bucket`);
+    console.log(`Processing file: ${filePath}`);
+    console.log(`Configuration: ${processor.config.aws.region} region, ${processor.config.aws.s3BucketName} bucket`);
     console.log("");
 
     // Process the report
@@ -128,35 +125,35 @@ async function main() {
     // Display summary
     if (results.success) {
       console.log("\n" + "=".repeat(55));
-      console.log("📊 PROCESSING SUMMARY");
+      console.log("PROCESSING SUMMARY");
       console.log("=".repeat(55));
-      console.log(`✅ Success: ${results.success}`);
-      console.log(`📄 Total Pages: ${results.totalPages}`);
-      console.log(`📋 Reports Found: ${results.reportsFound}`);
-      console.log(`🎯 Reports Processed: ${results.reportsProcessed}`);
-      console.log(`❌ Reports Failed: ${results.reportsFailed}`);
-      console.log(`⏱️  Processing Time: ${results.processingTimeSeconds}s`);
+      console.log(`Success: ${results.success}`);
+      console.log(`Total Pages: ${results.totalPages}`);
+      console.log(`Reports Found: ${results.reportsFound}`);
+      console.log(`Reports Processed: ${results.reportsProcessed}`);
+      console.log(`Reports Failed: ${results.reportsFailed}`);
+      console.log(`Processing Time: ${results.processingTimeSeconds}s`);
 
       if (results.results && results.results.length > 0) {
-        console.log("\n📋 Patient Details:");
+        console.log("\nPatient Details:");
         results.results.forEach((result, index) => {
           if (result.success && result.metadata) {
             console.log(`   ${index + 1}. ${result.metadata.name || 'Unknown'} (${result.metadata.patientId || 'No ID'}) - ${result.pageCount} pages`);
-            console.log(`      📍 Uploaded: ${result.uploadResult?.filename || 'N/A'}`);
-            console.log(`      🎯 Confidence: ${result.metadata.confidence?.toFixed(1) || 'N/A'}%`);
+            console.log(`       Uploaded: ${result.uploadResult?.filename || 'N/A'}`);
+            console.log(`       Confidence: ${result.metadata.confidence?.toFixed(1) || 'N/A'}%`);
           } else {
-            console.log(`   ${index + 1}. ❌ Failed: ${result.error}`);
+            console.log(`   ${index + 1}.  Failed: ${result.error}`);
           }
         });
       }
     } else {
-      console.log("\n❌ Processing failed:");
+      console.log("\n Processing failed:");
       console.log(`   Error: ${results.error}`);
       console.log(`   Time: ${results.processingTimeSeconds}s`);
     }
 
   } catch (error) {
-    console.error("\n❌ Fatal error:", error.message);
+    console.error("\n Fatal error:", error.message);
     process.exit(1);
   }
 }
@@ -164,7 +161,7 @@ async function main() {
 // Run main function if this file is executed directly
 if (import.meta.url === `file://${process.argv[1]}`) {
   main().catch(error => {
-    console.error("❌ Unexpected error:", error);
+    console.error(" Unexpected error:", error);
     process.exit(1);
   });
 }
